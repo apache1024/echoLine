@@ -28,7 +28,8 @@ echo 'fi' >> $input_file.~
 # Открываем файл для чтения и используем цикл while
 while IFS= read -r line; do
     # Обрабатываем каждую строку - в данном примере просто выводим ее
-    echo -e "echo -e '$line' >> $outputFile" >> $input_file.~
+    line1=$(echo -e $line|sed "s/'/\\\\x27/g")
+    echo  "echo -e '$line1' >> $outputFile" >> $input_file.~
 done < "$input_file"
 
 echo '# ############### КОНЕЦ РЕДАКТУРЫ '$outputFile' ###########################'>> $input_file.~
